@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<version id="0.1.2">
+  <fichier>
+    <path>Game\test.txt</path>
+    <version>0.1.1</version>
+  </fichier>
+  <fichier>
+    <path>Game\test.py</path>
+    <version>0.1.2</version>
+  </fichier>
+</version>

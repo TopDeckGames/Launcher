@@ -1,0 +1,12 @@
+﻿################################################################################
+# Ce fichier .gitignore a été créé automatiquement par Microsoft(R) Visual Studio.
+################################################################################
+
+/Launcher/bin/Debug
+/Launcher/obj/Debug
+/ManifestMaker/bin/Debug
+/Updater/bin/Debug
+/Updater/obj/Debug
+/UpdateServer/bin/Debug
+/UpdateServer/obj/Debug
+/ManifestMaker/obj/Debug
