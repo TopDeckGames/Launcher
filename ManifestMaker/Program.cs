@@ -36,13 +36,15 @@ namespace ManifestMaker
             //Indexation des nouveaux fichiers
             foreach (string filePath in Directory.GetFiles(@"New\", "*.*", SearchOption.AllDirectories))
             {
+                string fileName = filePath.Substring(4, filePath.Length - 4);
+
                 //Création d'un nouveau fichier
                 XmlElement file = newManifest.CreateElement(string.Empty, "fichier", string.Empty);
                 versionBase.AppendChild(file);
 
                 //On ajoute le chemin
                 XmlElement path = newManifest.CreateElement(string.Empty, "path", string.Empty);
-                XmlText pathText = newManifest.CreateTextNode(filePath);
+                XmlText pathText = newManifest.CreateTextNode(fileName);
                 path.AppendChild(pathText);
                 file.AppendChild(path);
 
@@ -59,8 +61,8 @@ namespace ManifestMaker
                     //Si le fichier existe déjà on compare le contenu
                     if (currentPath.Equals(filePath))
                     {
-                        DateTime ftime = File.GetLastWriteTime(@"Old\" + filePath);
-                        DateTime ftime2 = File.GetLastWriteTime(@"New\" + filePath);
+                        DateTime ftime = File.GetLastWriteTime(@"Old\" + fileName);
+                        DateTime ftime2 = File.GetLastWriteTime(@"New\" + fileName);
 
                         //Si le contenu est le même on garde l'ancien numéro de version
                         if (ftime.Equals(ftime2))
