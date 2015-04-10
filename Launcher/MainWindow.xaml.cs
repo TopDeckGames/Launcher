@@ -66,7 +66,7 @@ namespace Launcher
 
             //Connexion au serveur
             TcpClient client = new TcpClient();
-            IPEndPoint serverEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 5555);
+            IPEndPoint serverEndPoint = new IPEndPoint(Dns.GetHostEntry("etaverne.ddns.net").AddressList[0], 5555);
             try
             {
                 client.Connect(serverEndPoint);
@@ -119,7 +119,7 @@ namespace Launcher
             //Si la version du serveur est différente de la version locale, on met à jour
             if (!currentVersion.Equals(remoteVersion))
             {
-                this.updateState = State.GET_FILES;
+                this.UpdateState = State.GET_FILES;
 
                 //Création d'un dossier temporaire pour stocker les nouveaux fichiers
                 if (Directory.Exists(@"Temp"))
@@ -216,7 +216,7 @@ namespace Launcher
                 }
 
                 //On copie les nouveaux fichiers dans le répertoire de l'application
-                this.updateState = State.UPDATE;
+                this.UpdateState = State.UPDATE;
                 int length = Directory.GetFiles(@"Temp\", "*.*", SearchOption.AllDirectories).Length;
                 i = 0;
                 foreach (string dirPath in Directory.GetDirectories(@"Temp\", "*", SearchOption.AllDirectories))
@@ -254,7 +254,7 @@ namespace Launcher
             }
 
             //On enregistre le nouveau manifest
-            this.updateState = State.END;
+            this.UpdateState = State.END;
             newManifest.PreserveWhitespace = true;
             newManifest.Save(ConfigurationManager.AppSettings["manifest"]);
 
@@ -289,7 +289,14 @@ namespace Launcher
 
         private void cmdPlay_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start(@"Game\main.exe");
+            try
+            {
+                Process.Start(@"HackMyDeck\HackMyDeck.exe");
+            }
+            catch(Exception ex)
+            {
+                
+            }
         }
     }
 }
